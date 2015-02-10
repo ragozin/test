@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<meta charset="utf-8">
+</head>
+<body bgcolor="#222">
+	
+	<div id="info" style="color:#fff">fail</div><br>
+
+	<script>
+	var info = document.getElementById('info');
+	info.innerHTML = "Ok!";
+
+	function random(min, max){
+		return Math.random() * (max - min) + min;
+	}
+	</script>
+
+	<script>
+	var scope = "global";
+	function f() {
+		console.log(scope); // Prints "undefined", not "global"
+		var scope = "local"; // Variable initialized here, but defined everywhere
+		console.log(scope); // Prints "local"
+	}
+	/*
+	You might think that the first line of the function would print в__globalв__, because the
+	var statement declaring the local variable has not yet been executed. Because of the
+	rules of function scope, however, this is not what happens. The local variable is defined
+	throughout the body of the function, which means the global variable by the same name
+	is hidden throughout the function. Although the local variable is defined throughout,
+	it is not actually initialized until the var statement is executed:
+
+	function f() {
+		var scope; // Local variable is declared at the top of the function
+		console.log(scope); // It exists here, but still has "undefined" value
+		scope = "local"; // Now we initialize it and give it a value
+		console.log(scope); // And here it has the value we expect
+	}
+	*/
+
+	f();
+	</script>
+
+</body>
+</html>
